@@ -66,6 +66,7 @@ public class UXNewDonor extends javax.swing.JFrame {
         nxtDate = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
@@ -90,7 +91,7 @@ public class UXNewDonor extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 410, 100, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 510, 100, -1));
 
         bg.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         bg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A", "B", "AB", "O", " " }));
@@ -101,7 +102,7 @@ public class UXNewDonor extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Date");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 80, 70, 30));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 70, 30));
 
         stt.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         getContentPane().add(stt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, 163, 30));
@@ -141,7 +142,7 @@ public class UXNewDonor extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 0, 80, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 0, 80, -1));
 
         sex.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         sex.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Male", "Female", " " }));
@@ -153,7 +154,7 @@ public class UXNewDonor extends javax.swing.JFrame {
         getContentPane().add(sex, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 71, 30));
 
         dt.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        getContentPane().add(dt, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 80, 163, 30));
+        getContentPane().add(dt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 390, 163, 30));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("Donor Name");
@@ -162,7 +163,7 @@ public class UXNewDonor extends javax.swing.JFrame {
         jButton4.setBackground(new java.awt.Color(0, 153, 204));
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton4.setText("RESET");
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 460, 100, -1));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 560, 100, -1));
 
         name.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         getContentPane().add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 180, -1));
@@ -200,8 +201,8 @@ public class UXNewDonor extends javax.swing.JFrame {
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, -1, 20));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel1.setText("NEXT DATE OF DONATION");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 120, 150, 30));
+        jLabel1.setText("NEXT APPOINTMENT");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 120, 30));
 
         nxtDate.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         nxtDate.setToolTipText("DD/MM/YYYY");
@@ -210,7 +211,7 @@ public class UXNewDonor extends javax.swing.JFrame {
                 nxtDateActionPerformed(evt);
             }
         });
-        getContentPane().add(nxtDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 120, 163, 30));
+        getContentPane().add(nxtDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 440, 163, 30));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         jLabel2.setText("** NEXT DATE OF BLOOD DONATION IS ALWAYS AFTER 90 DAYS OF DONATING BLOOD FOR SAFETY HEALTH REASONS.");
@@ -218,7 +219,10 @@ public class UXNewDonor extends javax.swing.JFrame {
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/B6.JPG"))); // NOI18N
         jLabel13.setText("jLabel13");
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 770));
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 770));
+
+        jButton5.setText("jButton5");
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 520, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -285,6 +289,9 @@ public class UXNewDonor extends javax.swing.JFrame {
         //first oo =new first();
        // oo.setVisible(true);
       //  this.dispose();
+        
+        this.dispose();
+        new StaffUserdash().setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void sexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sexActionPerformed
@@ -309,51 +316,95 @@ public class UXNewDonor extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
+                String sql ="Select * from donorsdata where RegNo = ?";
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3308/bloodbank","root","tiger");
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setString(1, reg.getText());
+            ResultSet rs = stm.executeQuery();
+                  if(rs.next())
+                     {
+                         String m=rs.getString("Name");
+                         name.setText(m+"");
+                         String n=rs.getString("BloodGroup");
+                         bg.getEditor().setItem(""+n);
+                         String q=rs.getString("Sex");
+                         sex.getEditor().setItem(""+q);
+                         String o=rs.getString("Date");
+                        dt.setText(""+o);
+                         String p=rs.getString("NextDate");
+                         nxtDate.setText(""+p);
+                          JOptionPane.showMessageDialog(null,"Here You Go...  "+"\n Your data fetched  Sucessfully !!");
+//Moving to Admin userInterface
+                                
+                //JOptionPane.showMessageDialog(null,"Welcome"+user.getText()+"\nYou are LogedIn Sucessfully !!"+JOptionPane.PLAIN_MESSAGE );
+                
+                         }
+
+                    else{
+                             JOptionPane.showMessageDialog(null,"Data Not Found "+"\n RETRY !!");
+                               //JOptionPane.showMessageDialog(null,"Wrong Password or UserID"+user.getText()+"\nRETRY !!"+JOptionPane.ERROR_MESSAGE );
+                            }
+        }
+        catch(ClassNotFoundException | SQLException | HeadlessException f){
+            JOptionPane.showMessageDialog(null,f );
+
+        }
         
         
         //This will search and get details of a donor from DONORSDATA table 
                     
-    
-      int l=0;
-       int k =Integer.parseInt(reg.getText());
 
-            try {
-                Class.forName("com.mysql.jdbc.Driver");
-                Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bloodbank","root","tiger");
-                Statement stmt = con.createStatement();
-                String SQL = "select count(regNo) from donorsdata" ;
-                ResultSet rs = stmt.executeQuery(SQL);
-         
-        
-         
-if (rs.next())
-{
-         l =rs.getInt("count(regNo)");
-        reg.setText(l+"");
-}
-else
-        {
-               reg.setText(""+k);
-                }
-      
-        rs.close();
-            stmt.close();
-            con.close();
-          
-        }   catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Errorrrrrrrrrr in connectivity");
-           
-            }
-             
-  
-        
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-          reg.setText(0+"");
+          
+           String sql ="Select count(RegNo) from donorsdata";
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3308/bloodbank","root","tiger");
+            PreparedStatement stm = con.prepareStatement(sql);
+            //stm.setString(1, regn.getText());
+            ResultSet rs = stm.executeQuery();
+            if(rs.next())
+            {
+                String m=rs.getString("count(RegNo)");
+                
+                
+                
+               int k=Integer.parseInt(m);
+               k=k+1;
+                
+               reg.setText(k+"");
+                JOptionPane.showMessageDialog(null,"ALL SET... "+"\n New Registration!!");
+                //Moving to Admin userInterface
+
+                //JOptionPane.showMessageDialog(null,"Welcome"+user.getText()+"\nYou are LogedIn Sucessfully !!"+JOptionPane.PLAIN_MESSAGE );
+
+            }
+
+            else{
+                JOptionPane.showMessageDialog(null,"Data Not Found "+"\n RETRY !!");
+                //JOptionPane.showMessageDialog(null,"Wrong Password or UserID"+user.getText()+"\nRETRY !!"+JOptionPane.ERROR_MESSAGE );
+            }
+        }
+        catch(ClassNotFoundException | SQLException | HeadlessException f){
+            JOptionPane.showMessageDialog(null,f );
+
+        }
+
+        
+        
+          
+          
+          
+          
+          
+          
+          
         
         // here this will count the numbers of donors from the table and provide the new registration number to this frame
         
@@ -408,6 +459,7 @@ else
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

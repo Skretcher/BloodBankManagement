@@ -1,7 +1,10 @@
 
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
@@ -70,6 +73,11 @@ public class UserRegister extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         jButton3.setText("BACK");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton3);
         jButton3.setBounds(330, 10, 59, 23);
 
@@ -177,7 +185,7 @@ public class UserRegister extends javax.swing.JFrame {
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/b2.jpg"))); // NOI18N
         jLabel12.setText("jLabel12");
         getContentPane().add(jLabel12);
-        jLabel12.setBounds(0, 0, 400, 460);
+        jLabel12.setBounds(0, 0, 390, 460);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -264,12 +272,50 @@ public class UserRegister extends javax.swing.JFrame {
         String t = formatter.format(currentDate.getTime());
         dt.setText(t);
         
-        
+         String sql ="Select count(RegNo) from staffdata";
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3308/bloodbank","root","tiger");
+            PreparedStatement stm = con.prepareStatement(sql);
+            //stm.setString(1, regn.getText());
+            ResultSet rs = stm.executeQuery();
+            if(rs.next())
+            {
+                String m=rs.getString("count(RegNo)");
+                
+                
+                
+               int k=Integer.parseInt(m);
+               k=k+1;
+                
+               regNo.setText(k+"");
+                JOptionPane.showMessageDialog(null,"ALL SET... "+"\n New Registration!!");
+                //Moving to Admin userInterface
+
+                //JOptionPane.showMessageDialog(null,"Welcome"+user.getText()+"\nYou are LogedIn Sucessfully !!"+JOptionPane.PLAIN_MESSAGE );
+
+            }
+
+            else{
+                JOptionPane.showMessageDialog(null,"Data Not Found "+"\n RETRY !!");
+                //JOptionPane.showMessageDialog(null,"Wrong Password or UserID"+user.getText()+"\nRETRY !!"+JOptionPane.ERROR_MESSAGE );
+            }
+        }
+        catch(ClassNotFoundException | SQLException | HeadlessException f){
+            JOptionPane.showMessageDialog(null,f );
+
+        }
 
         
         
         
     }//GEN-LAST:event_formWindowOpened
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+         this.dispose();
+        new Home().setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -59,6 +59,11 @@ public class LogIn extends javax.swing.JFrame {
 
         jButton2.setBackground(new java.awt.Color(204, 0, 102));
         jButton2.setText("EXIT");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 450, -1, -1));
 
         admin.setBackground(new java.awt.Color(255, 102, 255));
@@ -150,7 +155,7 @@ public class LogIn extends javax.swing.JFrame {
  if(staff.isSelected())
  
  {
-       String sql ="Select * from staffdata where RegNo = ? and Password = ?";
+       String sql ="Select * from staffdata where  RegNo = ? and Password = ?";
         
      try{
             Class.forName("com.mysql.jdbc.Driver");
@@ -188,6 +193,12 @@ public class LogIn extends javax.swing.JFrame {
     private void adminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_adminActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        new Home().setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

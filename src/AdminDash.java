@@ -1,4 +1,14 @@
 
+import java.awt.HeadlessException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -28,35 +38,175 @@ public class AdminDash extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        User = new javax.swing.JLabel();
+        STAFFbtn = new javax.swing.JButton();
+        Record = new javax.swing.JButton();
+        History = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("ADMIN DASHBOARD");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 115, 23));
 
         jButton2.setText("EXIT");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(605, 0, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 190, Short.MAX_VALUE)
-                .addComponent(jButton2))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(156, Short.MAX_VALUE))
-        );
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setText("Hi");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 29, 61, -1));
+
+        User.setText("jLabel3");
+        getContentPane().add(User, new org.netbeans.lib.awtextra.AbsoluteConstraints(327, 32, 123, 22));
+
+        STAFFbtn.setText("STAFF");
+        STAFFbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                STAFFbtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(STAFFbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 93, -1, -1));
+
+        Record.setText("DONORS/RECIVER DATA");
+        Record.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RecordActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Record, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 127, 169, -1));
+
+        History.setText("DONORS/RECIVER HISTORY");
+        History.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HistoryActionPerformed(evt);
+            }
+        });
+        getContentPane().add(History, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 166, -1, -1));
+
+        jButton5.setText("STOCK Refresh");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "BLOOD GROUP", "UNIT(S)", "DATE", "REMARK"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 284, 660, 120));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/b7.png"))); // NOI18N
+        jLabel3.setText("jLabel3");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 660, 410));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    @SuppressWarnings("empty-statement")
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        new Home().setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void HistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HistoryActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        new UXhistoryRD().setVisible(true);
+    }//GEN-LAST:event_HistoryActionPerformed
+
+    private void STAFFbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_STAFFbtnActionPerformed
+        // TODO add your handling code here:
+      this.dispose();
+        new AdminStaffReport().setVisible(true);
+    }//GEN-LAST:event_STAFFbtnActionPerformed
+
+    private void RecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecordActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        new UXrecordDR().setVisible(true);
+    }//GEN-LAST:event_RecordActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        
+         DefaultTableModel dml =(DefaultTableModel) jTable2.getModel();
+
+        // IF DONOR SELECTED
+         //to view fresh data in table 
+            
+            //SEARCH WITH Contact NUMBER
+             dml.setRowCount(0);
+                String sql ="Select * from stocks";
+                try{
+                    Class.forName("com.mysql.jdbc.Driver");
+                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3308/bloodbank","root","tiger");
+                    PreparedStatement stm = con.prepareStatement(sql);
+                    ResultSet rs = stm.executeQuery();
+                    while(rs.next())
+                    {
+                      
+                        String BloodGroup = (rs.getString("BloodGroup"));
+                        String Quantity=(rs.getString("Units"));
+                        String Date=(rs.getString("Date"));
+                        String St=(rs.getString("Status"));
+
+                        dml.addRow(new Object[] {BloodGroup,Quantity,Date,St});
+
+                       
+                        //Moving to Admin userInterface
+                        // this.dispose();
+                        //     new AdminDash().setVisible(true);
+                        //JOptionPane.showMessageDialog(null,"Welcome"+user.getText()+"\nYou are LogedIn Sucessfully !!"+JOptionPane.PLAIN_MESSAGE );
+
+                    }
+ JOptionPane.showMessageDialog(null,"Hi..!! Admin "+"\n Details as follows,,, (-:");
+                   
+                }
+                catch(ClassNotFoundException | SQLException | HeadlessException z){
+                    JOptionPane.showMessageDialog(null,z );
+
+                }
+            
+        
+        
+        
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -86,15 +236,24 @@ public class AdminDash extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AdminDash().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new AdminDash().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton History;
+    private javax.swing.JButton Record;
+    private javax.swing.JButton STAFFbtn;
+    private javax.swing.JLabel User;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 }

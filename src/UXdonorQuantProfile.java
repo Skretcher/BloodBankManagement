@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 
 /*
@@ -37,7 +39,7 @@ public class UXdonorQuantProfile extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        pint = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -50,7 +52,10 @@ public class UXdonorQuantProfile extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         lbl3 = new javax.swing.JLabel();
-        lbl4 = new javax.swing.JLabel();
+        ND = new javax.swing.JTextField();
+        Stock = new javax.swing.JButton();
+        status = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
@@ -60,39 +65,52 @@ public class UXdonorQuantProfile extends javax.swing.JFrame {
             public void windowLostFocus(java.awt.event.WindowEvent evt) {
             }
         });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("USER NAME");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 112, 71, 31));
 
         jLabel2.setText("QUANTITY");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 207, 60, 28));
 
-        jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
+        pint.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField1FocusGained(evt);
+                pintFocusGained(evt);
             }
         });
+        getContentPane().add(pint, new org.netbeans.lib.awtextra.AbsoluteConstraints(169, 207, 47, 28));
 
         jLabel3.setText("UNITS");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 221, -1, -1));
 
         jLabel4.setText("DATE OF DONATION");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 246, 116, 31));
 
         jLabel5.setText("NEXT DATE OF DONATION");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 283, -1, 39));
 
-        jButton1.setText("SAVE");
+        jButton1.setText("SAVE to packet");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 340, -1, -1));
 
         jLabel6.setText("BLOOD GROUP");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 161, 83, 30));
 
         jLabel7.setText("REG NO.");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 74, 71, 27));
+        getContentPane().add(lbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(169, 112, 179, 27));
+        getContentPane().add(lbl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(169, 161, 178, 26));
 
         regn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 regnActionPerformed(evt);
             }
         });
+        getContentPane().add(regn, new org.netbeans.lib.awtextra.AbsoluteConstraints(169, 74, 65, 27));
 
         jButton2.setText("SEARCH");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -100,91 +118,38 @@ public class UXdonorQuantProfile extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 74, -1, -1));
 
         jButton3.setText("BACK TO DASHBOARD");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(312, 0, -1, -1));
+        getContentPane().add(lbl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(169, 246, 176, 31));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(34, 34, 34)
-                                        .addComponent(lbl4, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel3))
-                                            .addComponent(lbl3, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lbl2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(regn, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jButton2))
-                                            .addComponent(lbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(152, 152, 152)
-                        .addComponent(jButton1)))
-                .addGap(0, 125, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton3))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jButton3)
-                .addGap(51, 51, 51)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(regn, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
-                .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                    .addComponent(lbl3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(53, 53, 53))
-        );
+        ND.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NDActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ND, new org.netbeans.lib.awtextra.AbsoluteConstraints(169, 287, 166, 31));
+
+        Stock.setText("Save to stock");
+        Stock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StockActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Stock, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 381, 0, -1));
+
+        status.setText("Donated");
+        getContentPane().add(status, new org.netbeans.lib.awtextra.AbsoluteConstraints(412, 390, -1, -1));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/b10.jpg"))); // NOI18N
+        jLabel8.setText("jLabel8");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 420));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -192,9 +157,40 @@ public class UXdonorQuantProfile extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:    
         
+                         String a = regn.getText();
+                         String b = lbl1.getText();
+                         String c=lbl2.getText();
+                         String d=pint.getText();
+                         String e=lbl3.getText();
+                         String f =ND.getText();
         
         //SAVE ABOVE ENTERED DATA INTO PACKETS TABLE
         
+     try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection cn=DriverManager.getConnection("jdbc:mysql://localhost:3308/bloodbank","root","tiger");
+                        PreparedStatement smt=cn.prepareStatement("insert into dnrpackets values(?,?,?,?,?,?)");
+                        String SQ = "update donorsdata set Date ='"+e+"' , NextDate ='"+f+"'where RegNo='"+a+"' " ; 
+                        smt.setString(1,a);
+                        smt.setString(2,b);
+                        smt.setString(3,c);
+                        smt.setString(4,d);
+                        smt.setString(5,e);
+                        smt.setString(6,f);
+                    
+                        smt.executeUpdate();
+                        smt.executeUpdate(SQ);
+                        cn.close();     
+
+           //into Packet details
+                            JOptionPane.showMessageDialog(this,"Data Updated. ","Success",JOptionPane.PLAIN_MESSAGE);
+                            Stock.doClick();
+                            
+                 }
+            catch(HeadlessException | ClassNotFoundException | SQLException err)
+        {
+                             System.out.println("Opps ErroRRR !! :"+err);
+        }
         
         
         
@@ -213,12 +209,12 @@ public class UXdonorQuantProfile extends javax.swing.JFrame {
         
     }//GEN-LAST:event_formWindowGainedFocus
 
-    private void jTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusGained
+    private void pintFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pintFocusGained
         // TODO add your handling code here:
         
         // WRITE A QUARRY WITH LABEL8 'S REGISTRATION NUMBER TO DRAW NAME AND BLOOD GROUP FROM DONORSDATA TABLE
         
-    }//GEN-LAST:event_jTextField1FocusGained
+    }//GEN-LAST:event_pintFocusGained
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -238,7 +234,7 @@ public class UXdonorQuantProfile extends javax.swing.JFrame {
                          String o=rs.getString("Date");
                          lbl3.setText(""+o);
                          String p=rs.getString("NextDate");
-                         lbl4.setText(""+p);
+                         ND.setText(""+p);
                           JOptionPane.showMessageDialog(null,"Here You Go... "+lbl1.getText()+" "+"\n Your data fetched  Sucessfully !!");
 //Moving to Admin userInterface
                                 
@@ -264,6 +260,62 @@ public class UXdonorQuantProfile extends javax.swing.JFrame {
     private void regnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_regnActionPerformed
+
+    private void NDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NDActionPerformed
+
+    private void StockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StockActionPerformed
+        // TODO add your handling code here:
+        //save blood group and quantity 
+                         
+                         String q=lbl2.getText();
+                         String r=pint.getText();
+                         String s=lbl3.getText();
+                         String t=status.getText();
+                         
+                        
+        
+        //SAVE ABOVE ENTERED DATA INTO PACKETS TABLE
+        
+     try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection cn=DriverManager.getConnection("jdbc:mysql://localhost:3308/bloodbank","root","tiger");
+                        PreparedStatement smt=cn.prepareStatement("insert into stocks values(?,?,?,?)");
+                        smt.setString(1,q);
+                        smt.setString(2,r);
+                        smt.setString(3,s);
+                        smt.setString(4,t);
+                        
+                    
+                        smt.executeUpdate();
+                        cn.close();     
+
+           
+                            JOptionPane.showMessageDialog(this,"Data Updated into Stock !!","Success",JOptionPane.PLAIN_MESSAGE);
+                            
+                 }
+            catch(HeadlessException | ClassNotFoundException | SQLException err)
+        {
+                             System.out.println("Opps ErroRRR !! :"+err);
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_StockActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+         this.dispose();
+        new StaffUserdash().setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -301,6 +353,8 @@ public class UXdonorQuantProfile extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField ND;
+    private javax.swing.JButton Stock;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -311,11 +365,12 @@ public class UXdonorQuantProfile extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel lbl1;
     private javax.swing.JLabel lbl2;
     private javax.swing.JLabel lbl3;
-    private javax.swing.JLabel lbl4;
+    private javax.swing.JTextField pint;
     private javax.swing.JTextField regn;
+    private javax.swing.JLabel status;
     // End of variables declaration//GEN-END:variables
 }

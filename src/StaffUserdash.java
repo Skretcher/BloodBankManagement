@@ -28,48 +28,47 @@ public class StaffUserdash extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        SEARCH = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
+        REGISTEREDusers = new javax.swing.JButton();
+        RegBuyers = new javax.swing.JButton();
         mm = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(627, 520));
-        getContentPane().setLayout(null);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("UserDash");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 63, 14);
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 63, -1));
 
-        jButton1.setText("New Donor");
+        jButton1.setText("NEW DONORS REGISTRATION");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(320, 80, 120, 40);
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 720, 210, 40));
 
-        jButton2.setText("Search Donor");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        SEARCH.setText("Search Donor");
+        SEARCH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                SEARCHActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2);
-        jButton2.setBounds(480, 80, 120, 40);
+        getContentPane().add(SEARCH, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 720, 120, 40));
 
-        jButton3.setText("Sell Blood");
+        jButton3.setText("BUYER/RECIVER REGISTRATION");
+        jButton3.setActionCommand("BUYER/RECIVER /n REGISTRATION");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3);
-        jButton3.setBounds(800, 80, 120, 40);
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 720, 210, 40));
 
         jButton5.setText("EXIT");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -77,8 +76,7 @@ public class StaffUserdash extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5);
-        jButton5.setBounds(1110, 0, 82, 34);
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 0, 82, 34));
 
         jButton6.setText("Search Buyer");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -86,8 +84,7 @@ public class StaffUserdash extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton6);
-        jButton6.setBounds(640, 80, 110, 40);
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 290, 120, 40));
 
         jButton7.setText("STOCK");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -95,15 +92,28 @@ public class StaffUserdash extends javax.swing.JFrame {
                 jButton7ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton7);
-        jButton7.setBounds(950, 80, 110, 40);
-        getContentPane().add(mm);
-        mm.setBounds(679, 432, 68, 63);
+        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 350, 110, 40));
+
+        REGISTEREDusers.setText("REGISTERED DONORS ");
+        REGISTEREDusers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                REGISTEREDusersActionPerformed(evt);
+            }
+        });
+        getContentPane().add(REGISTEREDusers, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 720, 190, 40));
+
+        RegBuyers.setText("REGISTERED RECIVERS/BUYERS");
+        RegBuyers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegBuyersActionPerformed(evt);
+            }
+        });
+        getContentPane().add(RegBuyers, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 720, 190, 40));
+        getContentPane().add(mm, new org.netbeans.lib.awtextra.AbsoluteConstraints(679, 432, 68, 63));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/b12.jpg"))); // NOI18N
         jLabel2.setText("jLabel2");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(0, 0, 1190, 770);
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 770));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -114,31 +124,44 @@ public class StaffUserdash extends javax.swing.JFrame {
      new UXNewDonor().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
-        new UXsearchDonor().setVisible(true);
+    private void SEARCHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SEARCHActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+        new UXsearchDonor().setVisible(true);
+        
+    }//GEN-LAST:event_SEARCHActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
        
           this.dispose();
-     new UXsoldUnit().setVisible(true);
+     new UXbuyerReg().setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         this.dispose();
+        new Home().setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
       
-        this.dispose();
+       
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
    
-        this.dispose();
+      
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void REGISTEREDusersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_REGISTEREDusersActionPerformed
+        // TODO add your handling code here:
+         this.dispose();
+        new UXdonorQuantProfile().setVisible(true);
+    }//GEN-LAST:event_REGISTEREDusersActionPerformed
+
+    private void RegBuyersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegBuyersActionPerformed
+        // TODO add your handling code here:
+         this.dispose();
+        new UXbyrQuant().setVisible(true);
+    }//GEN-LAST:event_RegBuyersActionPerformed
 
     /**
      * @param args the command line arguments
@@ -168,16 +191,16 @@ public class StaffUserdash extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new StaffUserdash().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new StaffUserdash().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton REGISTEREDusers;
+    private javax.swing.JButton RegBuyers;
+    private javax.swing.JButton SEARCH;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;

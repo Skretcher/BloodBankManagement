@@ -1,3 +1,12 @@
+
+import java.awt.HeadlessException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -26,21 +35,392 @@ public class UXsearchDonor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
+        jButton1 = new javax.swing.JButton();
+        donor = new javax.swing.JRadioButton();
+        reciver = new javax.swing.JRadioButton();
+        user = new javax.swing.JTextField();
+        loginBtn = new javax.swing.JButton();
+        cn = new javax.swing.JRadioButton();
+        nm = new javax.swing.JRadioButton();
+        dt = new javax.swing.JRadioButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 0, -1, -1));
+
+        donor.setBackground(new java.awt.Color(255, 102, 255));
+        buttonGroup1.add(donor);
+        donor.setText("DONOR");
+        donor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                donorActionPerformed(evt);
+            }
+        });
+        getContentPane().add(donor, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 106, 105, -1));
+
+        reciver.setBackground(new java.awt.Color(255, 153, 255));
+        buttonGroup1.add(reciver);
+        reciver.setText("RECIVER/BUYER");
+        getContentPane().add(reciver, new org.netbeans.lib.awtextra.AbsoluteConstraints(113, 106, -1, -1));
+
+        user.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userActionPerformed(evt);
+            }
+        });
+        getContentPane().add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(415, 132, 258, -1));
+
+        loginBtn.setBackground(new java.awt.Color(255, 51, 255));
+        loginBtn.setText("SEARCH");
+        loginBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(loginBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 131, 228, -1));
+
+        cn.setBackground(new java.awt.Color(0, 255, 204));
+        buttonGroup2.add(cn);
+        cn.setText("CONTACT NUMBER");
+        cn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cn, new org.netbeans.lib.awtextra.AbsoluteConstraints(415, 106, 154, -1));
+
+        nm.setBackground(new java.awt.Color(102, 255, 204));
+        buttonGroup2.add(nm);
+        nm.setText("NAME");
+        getContentPane().add(nm, new org.netbeans.lib.awtextra.AbsoluteConstraints(569, 106, -1, -1));
+
+        dt.setBackground(new java.awt.Color(153, 255, 204));
+        buttonGroup2.add(dt);
+        dt.setText("DATE");
+        dt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dtActionPerformed(evt);
+            }
+        });
+        getContentPane().add(dt, new org.netbeans.lib.awtextra.AbsoluteConstraints(622, 106, -1, -1));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "REGISTRATION NUMBER", "Name", "Contact", "Date", "Remark"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 800, 130));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("D:\\downloads\\blood\\b111.jpg")); // NOI18N
+        jLabel1.setText("jLabel1");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 460));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
+        DefaultTableModel dml =(DefaultTableModel) jTable1.getModel();
+
+        // IF DONOR SELECTED
+        if (donor.isSelected())
+        {
+            //SEARCH WITH Contact NUMBER
+            if(cn.isSelected())
+            {
+                String sql ="Select * from donorsdata where Contact = ?";
+                try{
+                    Class.forName("com.mysql.jdbc.Driver");
+                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3308/bloodbank","root","tiger");
+                    PreparedStatement stm = con.prepareStatement(sql);
+                    stm.setString(1, user.getText());
+
+                    ResultSet rs = stm.executeQuery();
+                    if(rs.next())
+                    {
+                        String Name=(rs.getString("Name"));
+
+                        String RNo=(rs.getString("RegNo"));
+
+                        String BloodGroup = (rs.getString("BloodGroup"));
+                        String contact=(rs.getString("Contact"));
+                        String Date=(rs.getString("Date"));
+
+                        dml.addRow(new Object[] {RNo,Name,contact,Date,BloodGroup});
+
+                        JOptionPane.showMessageDialog(null,"Hi..!! "+Name+"\n Details as follows,,, (-:");
+                        //Moving to Admin userInterface
+                        // this.dispose();
+                        //     new AdminDash().setVisible(true);
+                        //JOptionPane.showMessageDialog(null,"Welcome"+user.getText()+"\nYou are LogedIn Sucessfully !!"+JOptionPane.PLAIN_MESSAGE );
+
+                    }
+
+                    else{
+                        JOptionPane.showMessageDialog(null,"Wrong Password or UserID "+"\n RETRY !!");
+                        //JOptionPane.showMessageDialog(null,"Wrong Password or UserID"+user.getText()+"\nRETRY !!"+JOptionPane.ERROR_MESSAGE );
+                    }
+                }
+                catch(ClassNotFoundException | SQLException | HeadlessException f){
+                    JOptionPane.showMessageDialog(null,f );
+
+                }
+            }
+            //SEARCH WITH NAME
+            if(nm.isSelected())
+            {
+                String sql ="Select * from donorsdata where Name = ?";
+                try{
+                    Class.forName("com.mysql.jdbc.Driver");
+                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3308/bloodbank","root","tiger");
+                    PreparedStatement stm = con.prepareStatement(sql);
+                    stm.setString(1, user.getText());
+
+                    ResultSet rs = stm.executeQuery();
+                    if(rs.next())
+                    {
+
+                        String Name=(rs.getString("Name"));
+
+                        String RNo=(rs.getString("RegNo"));
+
+                        String BloodGroup = (rs.getString("BloodGroup"));
+                        String contact=(rs.getString("Contact"));
+                        String Date=(rs.getString("Date"));
+
+                        dml.addRow(new Object[] {RNo,Name,contact,Date,BloodGroup});
+
+                        JOptionPane.showMessageDialog(null,"Hi..!! "+Name+"\n Details as follows,,, (-:");
+                        //Moving to Admin userInterface
+                        //     this.dispose();
+                        //      new AdminDash().setVisible(true);
+                        //JOptionPane.showMessageDialog(null,"Welcome"+user.getText()+"\nYou are LogedIn Sucessfully !!"+JOptionPane.PLAIN_MESSAGE );
+
+                    }
+
+                    else{
+                        JOptionPane.showMessageDialog(null,"Wrong Password or UserID "+"\n RETRY !!");
+                        //JOptionPane.showMessageDialog(null,"Wrong Password or UserID"+user.getText()+"\nRETRY !!"+JOptionPane.ERROR_MESSAGE );
+                    }
+                }
+                catch(ClassNotFoundException | SQLException | HeadlessException f){
+                    JOptionPane.showMessageDialog(null,f );
+
+                }
+            }
+
+            //SEARCH BY DATE
+            if(dt.isSelected())
+            {
+                String sql ="Select * from donorsdata where Date = ?";
+                try{
+                    Class.forName("com.mysql.jdbc.Driver");
+                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3308/bloodbank","root","tiger");
+                    PreparedStatement stm = con.prepareStatement(sql);
+                    stm.setString(1, user.getText());
+
+                    ResultSet rs = stm.executeQuery();
+                    if(rs.next())
+                    {
+                        String Name=(rs.getString("Name"));
+
+                        String RNo=(rs.getString("RegNo"));
+
+                        String BloodGroup = (rs.getString("BloodGroup"));
+                        String contact=(rs.getString("Contact"));
+                        String Date=(rs.getString("Date"));
+
+                        dml.addRow(new Object[] {RNo,Name,contact,Date,BloodGroup});
+
+                        JOptionPane.showMessageDialog(null,"Hi..!! "+Name+"\n Details as follows,,, (-:");
+                        //Moving to Admin userInterface
+                        //   this.dispose();
+                        //    new AdminDash().setVisible(true);
+                        //JOptionPane.showMessageDialog(null,"Welcome"+user.getText()+"\nYou are LogedIn Sucessfully !!"+JOptionPane.PLAIN_MESSAGE );
+
+                    }
+
+                    else{
+                        JOptionPane.showMessageDialog(null,"Wrong Password or UserID "+"\n RETRY !!");
+                        //JOptionPane.showMessageDialog(null,"Wrong Password or UserID"+user.getText()+"\nRETRY !!"+JOptionPane.ERROR_MESSAGE );
+                    }
+                }
+                catch(ClassNotFoundException | SQLException | HeadlessException f){
+                    JOptionPane.showMessageDialog(null,f );
+
+                }
+            }
+
+        }
+
+        //IF RECIVER SELECTED
+
+        else
+        if(reciver.isSelected())
+
+        { //SEARCH WITH REGISTRATION NUMBER
+            if(cn.isSelected())
+            {
+                String sql ="Select * from reciverdata where Contact = ?";
+                try{
+                    Class.forName("com.mysql.jdbc.Driver");
+                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3308/bloodbank","root","tiger");
+                    PreparedStatement stm = con.prepareStatement(sql);
+                    stm.setString(1, user.getText());
+
+                    ResultSet rs = stm.executeQuery();
+                    if(rs.next())
+                    {
+                        String Name=(rs.getString("Name"));
+
+                        String RNo=(rs.getString("RegNo"));
+
+                        String city = (rs.getString("City"));
+                        String contact=(rs.getString("Contact"));
+                        String Date=(rs.getString("Date"));
+
+                        dml.addRow(new Object[] {RNo,Name,contact,Date,city});
+
+                        JOptionPane.showMessageDialog(null,"Hi..!! "+Name+"\n Details as follows,,, (-:");
+                        //Moving to Admin userInterface
+                        // this.dispose();
+                        //     new AdminDash().setVisible(true);
+                        //JOptionPane.showMessageDialog(null,"Welcome"+user.getText()+"\nYou are LogedIn Sucessfully !!"+JOptionPane.PLAIN_MESSAGE );
+
+                    }
+
+                    else{
+                        JOptionPane.showMessageDialog(null,"Wrong Password or UserID "+"\n RETRY !!");
+                        //JOptionPane.showMessageDialog(null,"Wrong Password or UserID"+user.getText()+"\nRETRY !!"+JOptionPane.ERROR_MESSAGE );
+                    }
+                }
+                catch(ClassNotFoundException | SQLException | HeadlessException f){
+                    JOptionPane.showMessageDialog(null,f );
+
+                }
+            }
+            //SEARCH WITH NAME
+            if(nm.isSelected())
+            {
+                String sql ="Select * from reciverdata where Name = ?";
+                try{
+                    Class.forName("com.mysql.jdbc.Driver");
+                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3308/bloodbank","root","tiger");
+                    PreparedStatement stm = con.prepareStatement(sql);
+                    stm.setString(1, user.getText());
+
+                    ResultSet rs = stm.executeQuery();
+                    if(rs.next())
+                    {
+                        String Name=(rs.getString("Name"));
+
+                        String RNo=(rs.getString("RegNo"));
+
+                        String city = (rs.getString("City"));
+                        String contact=(rs.getString("Contact"));
+                        String Date=(rs.getString("Date"));
+
+                        dml.addRow(new Object[] {RNo,Name,contact,Date,city});
+
+                        JOptionPane.showMessageDialog(null,"Hi..!! "+Name+"\n Details as follows,,, (-:");
+                        //Moving to Admin userInterface
+                        //     this.dispose();
+                        //      new AdminDash().setVisible(true);
+                        //JOptionPane.showMessageDialog(null,"Welcome"+user.getText()+"\nYou are LogedIn Sucessfully !!"+JOptionPane.PLAIN_MESSAGE );
+
+                    }
+
+                    else{
+                        JOptionPane.showMessageDialog(null,"Wrong Password or UserID "+"\n RETRY !!");
+                        //JOptionPane.showMessageDialog(null,"Wrong Password or UserID"+user.getText()+"\nRETRY !!"+JOptionPane.ERROR_MESSAGE );
+                    }
+                }
+                catch(ClassNotFoundException | SQLException | HeadlessException f){
+                    JOptionPane.showMessageDialog(null,f );
+
+                }
+            }
+
+            //SEARCH BY DATE
+            if(dt.isSelected())
+            {
+                String sql ="Select * from reciverdata where Date = ?";
+                try{
+                    Class.forName("com.mysql.jdbc.Driver");
+                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3308/bloodbank","root","tiger");
+                    PreparedStatement stm = con.prepareStatement(sql);
+                    stm.setString(1, user.getText());
+
+                    ResultSet rs = stm.executeQuery();
+                    if(rs.next())
+                    {
+                        String Name=(rs.getString("Name"));
+
+                        String RNo=(rs.getString("RegNo"));
+
+                        String city = (rs.getString("City"));
+                        String contact=(rs.getString("Contact"));
+                        String Date=(rs.getString("Date"));
+
+                        dml.addRow(new Object[] {RNo,Name,contact,Date,city});
+
+                        JOptionPane.showMessageDialog(null,"Hi..!! "+Name+"\n Details as follows,,, (-:");
+                        //Moving to Admin userInterface
+                        //   this.dispose();
+                        //    new AdminDash().setVisible(true);
+                        //JOptionPane.showMessageDialog(null,"Welcome"+user.getText()+"\nYou are LogedIn Sucessfully !!"+JOptionPane.PLAIN_MESSAGE );
+
+                    }
+
+                    else{
+                        JOptionPane.showMessageDialog(null,"Wrong Password or UserID "+"\n RETRY !!");
+                        //JOptionPane.showMessageDialog(null,"Wrong Password or UserID"+user.getText()+"\nRETRY !!"+JOptionPane.ERROR_MESSAGE );
+                    }
+                }
+                catch(ClassNotFoundException | SQLException | HeadlessException f){
+                    JOptionPane.showMessageDialog(null,f );
+
+                }}
+        }
+    }//GEN-LAST:event_loginBtnActionPerformed
+
+    private void userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_userActionPerformed
+
+    private void dtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dtActionPerformed
+
+    private void donorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_donorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_donorActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        new StaffUserdash().setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -58,25 +438,30 @@ public class UXsearchDonor extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UXsearchDonor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UXsearchDonor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UXsearchDonor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(UXsearchDonor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new UXsearchDonor().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new UXsearchDonor().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JRadioButton cn;
+    private javax.swing.JRadioButton donor;
+    private javax.swing.JRadioButton dt;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JButton loginBtn;
+    private javax.swing.JRadioButton nm;
+    private javax.swing.JRadioButton reciver;
+    private javax.swing.JTextField user;
     // End of variables declaration//GEN-END:variables
 }
